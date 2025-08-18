@@ -1,0 +1,898 @@
+{
+  "91766": {
+    "name": "pomona                                  ",
+    "coords": [
+      34.0553813,
+      -117.7517496
+    ]
+  },
+  "02453": {
+    "name": "WALTHAM, MA                             ",
+    "coords": [
+      42.3762385,
+      -71.2355644
+    ]
+  },
+  "ACA  ": {
+    "name": "Acapulco                                ",
+    "coords": [
+      16.8680495,
+      -99.8940182
+    ]
+  },
+  "ADZ  ": {
+    "name": "San Andrés                              ",
+    "coords": [
+      6.8100668,
+      -72.8506351
+    ]
+  },
+  "APY  ": {
+    "name": "Apiay                                   ",
+    "coords": [
+      4.0670735,
+      -73.5725269
+    ]
+  },
+  "ASU  ": {
+    "name": "ASUNCION                                ",
+    "coords": [
+      -25.2800459,
+      -57.6343814
+    ]
+  },
+  "ATL  ": {
+    "name": "ATLANTA                                 ",
+    "coords": [
+      33.7544657,
+      -84.3898151
+    ]
+  },
+  "AUC  ": {
+    "name": "Arauca                                  ",
+    "coords": [
+      7.0851994,
+      -70.7577762
+    ]
+  },
+  "AXM  ": {
+    "name": "Armenia                                 ",
+    "coords": [
+      4.536307,
+      -75.6723751
+    ]
+  },
+  "BAQ  ": {
+    "name": "Barranquilla                            ",
+    "coords": [
+      10.9938599,
+      -74.7926118
+    ]
+  },
+  "BGA  ": {
+    "name": "Bucaramanga                             ",
+    "coords": [
+      7.1274697,
+      -73.1191168
+    ]
+  },
+  "BGI  ": {
+    "name": "BARBADOS                                ",
+    "coords": [
+      -19.5248148,
+      -40.5823626
+    ]
+  },
+  "BLB  ": {
+    "name": "BALBOA                                  ",
+    "coords": [
+      8.9495435,
+      -79.5529019
+    ]
+  },
+  "BOG  ": {
+    "name": "Bogotá                                  ",
+    "coords": [
+      4.6533815,
+      -74.0836331
+    ]
+  },
+  "BON  ": {
+    "name": "BONAIRE                                 ",
+    "coords": [
+      12.167,
+      -68.2876439
+    ]
+  },
+  "BRM  ": {
+    "name": "Barquisimeto                            ",
+    "coords": [
+      10.0774374,
+      -69.3222293
+    ]
+  },
+  "BUE  ": {
+    "name": "Buenos Aires                            ",
+    "coords": [
+      -34.6083696,
+      -58.4440583
+    ]
+  },
+  "CAT  ": {
+    "name": "Desconocido                             ",
+    "coords": [
+      41.7089525,
+      -0.8565087
+    ]
+  },
+  "CCS  ": {
+    "name": "Caracas                                 ",
+    "coords": [
+      10.5060934,
+      -66.9146008
+    ]
+  },
+  "CGW  ": {
+    "name": "Desconocido                             ",
+    "coords": [
+      41.7089525,
+      -0.8565087
+    ]
+  },
+  "CLAR ": {
+    "name": "Clarksville                             ",
+    "coords": [
+      36.5277607,
+      -87.3588703
+    ]
+  },
+  "CLO  ": {
+    "name": "Cali                                    ",
+    "coords": [
+      3.4519988,
+      -76.5325259
+    ]
+  },
+  "CRC  ": {
+    "name": "Cartago                                 ",
+    "coords": [
+      4.7465494,
+      -75.9121234
+    ]
+  },
+  "CRZ  ": {
+    "name": "Corozal                                 ",
+    "coords": [
+      9.3192389,
+      -75.2947262
+    ]
+  },
+  "CSC  ": {
+    "name": "Canas                                   ",
+    "coords": [
+      10.4296202,
+      -85.0932802
+    ]
+  },
+  "CTG  ": {
+    "name": "Cartagena                               ",
+    "coords": [
+      10.4265566,
+      -75.5441671
+    ]
+  },
+  "CUC  ": {
+    "name": "Cúcuta                                  ",
+    "coords": [
+      7.8971458,
+      -72.5080387
+    ]
+  },
+  "CUN  ": {
+    "name": "CANCUN                                  ",
+    "coords": [
+      21.1527467,
+      -86.8425761
+    ]
+  },
+  "CUR  ": {
+    "name": "Curacao                                 ",
+    "coords": [
+      12.1316561,
+      -68.9356107
+    ]
+  },
+  "CWB  ": {
+    "name": "Curitiba                                ",
+    "coords": [
+      -25.4295963,
+      -49.2712724
+    ]
+  },
+  "EJA  ": {
+    "name": "Barrancabermeja                         ",
+    "coords": [
+      7.0673313,
+      -73.8525627
+    ]
+  },
+  "EYP  ": {
+    "name": "Yopal                                   ",
+    "coords": [
+      5.3356662,
+      -72.3936931
+    ]
+  },
+  "EZE  ": {
+    "name": "Buenos Aires                            ",
+    "coords": [
+      -34.6083696,
+      -58.4440583
+    ]
+  },
+  "FDF  ": {
+    "name": "Fort-de-France                          ",
+    "coords": [
+      14.6027962,
+      -61.0676724
+    ]
+  },
+  "FLA  ": {
+    "name": "Florencia                               ",
+    "coords": [
+      1.6158666,
+      -75.6143045
+    ]
+  },
+  "FOF  ": {
+    "name": "Desconocido                             ",
+    "coords": [
+      41.7089525,
+      -0.8565087
+    ]
+  },
+  "GDL  ": {
+    "name": "GUADALAJARA                             ",
+    "coords": [
+      20.6720375,
+      -103.338396
+    ]
+  },
+  "GFL  ": {
+    "name": "Desconocido                             ",
+    "coords": [
+      41.7089525,
+      -0.8565087
+    ]
+  },
+  "GRDS ": {
+    "name": "GRAND RAPIDS                            ",
+    "coords": [
+      42.9632425,
+      -85.6678639
+    ]
+  },
+  "GSJ  ": {
+    "name": "Puerto San José                         ",
+    "coords": [
+      13.9246126,
+      -90.8191844
+    ]
+  },
+  "GUA  ": {
+    "name": "Guatemala City                          ",
+    "coords": [
+      14.6416142,
+      -90.5132836
+    ]
+  },
+  "GYE  ": {
+    "name": "Guayaquil                               ",
+    "coords": [
+      -2.2895167,
+      -80.0983887
+    ]
+  },
+  "HAV  ": {
+    "name": "La Habana                               ",
+    "coords": [
+      23.135305,
+      -82.3589631
+    ]
+  },
+  "HIA  ": {
+    "name": "HIALEAH                                 ",
+    "coords": [
+      25.822168,
+      -80.2777409
+    ]
+  },
+  "IBG  ": {
+    "name": "Ibague                                  ",
+    "coords": [
+      4.4386033,
+      -75.2108857
+    ]
+  },
+  "IQT  ": {
+    "name": "Iquitos                                 ",
+    "coords": [
+      -3.749365,
+      -73.2444145
+    ]
+  },
+  "KANS ": {
+    "name": "OLATHE                                  ",
+    "coords": [
+      38.8838856,
+      -94.81887
+    ]
+  },
+  "KIN  ": {
+    "name": "Kingston                                ",
+    "coords": [
+      17.9712148,
+      -76.7928128
+    ]
+  },
+  "KM   ": {
+    "name": "Kirchheim                               ",
+    "coords": [
+      49.6560775,
+      9.8585464
+    ]
+  },
+  "KOPF ": {
+    "name": "OPA-LOCKA                               ",
+    "coords": [
+      25.9023168,
+      -80.2503271
+    ]
+  },
+  "LA   ": {
+    "name": "LOS ANGELES                             ",
+    "coords": [
+      34.0536909,
+      -118.242766
+    ]
+  },
+  "LAS  ": {
+    "name": "LOS ANGELES                             ",
+    "coords": [
+      34.0536909,
+      -118.242766
+    ]
+  },
+  "LAT  ": {
+    "name": "Desconocido                             ",
+    "coords": [
+      41.7089525,
+      -0.8565087
+    ]
+  },
+  "LCE  ": {
+    "name": "La Ceiba                                ",
+    "coords": [
+      15.7833743,
+      -86.7917749
+    ]
+  },
+  "LET  ": {
+    "name": "Leticia                                 ",
+    "coords": [
+      -4.2129211,
+      -69.9425963
+    ]
+  },
+  "LIM  ": {
+    "name": "Lima                                    ",
+    "coords": [
+      -12.0621065,
+      -77.0365256
+    ]
+  },
+  "LPB  ": {
+    "name": "La Paz                                  ",
+    "coords": [
+      -16.4955455,
+      -68.1336229
+    ]
+  },
+  "LRM  ": {
+    "name": "LA ROMANA                               ",
+    "coords": [
+      18.4230137,
+      -68.9661104
+    ]
+  },
+  "LSP  ": {
+    "name": "VENEZUELA                               ",
+    "coords": [
+      10.1781757,
+      -64.6915568
+    ]
+  },
+  "LTV  ": {
+    "name": "Desconocido                             ",
+    "coords": [
+      41.7089525,
+      -0.8565087
+    ]
+  },
+  "MAN  ": {
+    "name": "MANAOS                                  ",
+    "coords": [
+      -3.1316333,
+      -59.9825041
+    ]
+  },
+  "MAO  ": {
+    "name": "MANAOS                                  ",
+    "coords": [
+      -3.1316333,
+      -59.9825041
+    ]
+  },
+  "MAR  ": {
+    "name": "Maracaibo                               ",
+    "coords": [
+      10.6498095,
+      -71.6443596
+    ]
+  },
+  "MDE  ": {
+    "name": "Medellín                                ",
+    "coords": [
+      6.2697324,
+      -75.6025597
+    ]
+  },
+  "MEC  ": {
+    "name": "Manta                                   ",
+    "coords": [
+      -0.948584,
+      -80.7191021
+    ]
+  },
+  "MED  ": {
+    "name": "MEDLEY                                  ",
+    "coords": [
+      25.8406526,
+      -80.3264404
+    ]
+  },
+  "MEX  ": {
+    "name": "Mexico City                             ",
+    "coords": [
+      19.4326296,
+      -99.1331785
+    ]
+  },
+  "MGA  ": {
+    "name": "Managua                                 ",
+    "coords": [
+      12.1544035,
+      -86.2737642
+    ]
+  },
+  "MIA  ": {
+    "name": "Miami                                   ",
+    "coords": [
+      25.7741728,
+      -80.19362
+    ]
+  },
+  "MID  ": {
+    "name": "MIDLAND                                 ",
+    "coords": [
+      31.9973662,
+      -102.077948
+    ]
+  },
+  "MIQ  ": {
+    "name": "MAIQUETIA                               ",
+    "coords": [
+      10.5966074,
+      -66.9597542
+    ]
+  },
+  "MQI  ": {
+    "name": "MAIQUETIA                               ",
+    "coords": [
+      10.5966074,
+      -66.9597542
+    ]
+  },
+  "MTR  ": {
+    "name": "Monteria                                ",
+    "coords": [
+      8.7509361,
+      -75.8786806
+    ]
+  },
+  "MTU  ": {
+    "name": "Mitú                                    ",
+    "coords": [
+      1.2538499,
+      -70.2345576
+    ]
+  },
+  "MVD  ": {
+    "name": "MONTEVIDEO                              ",
+    "coords": [
+      -34.9058916,
+      -56.1913095
+    ]
+  },
+  "MVP  ": {
+    "name": "MITU                                    ",
+    "coords": [
+      1.2538499,
+      -70.2345576
+    ]
+  },
+  "NAS  ": {
+    "name": "NASO                                    ",
+    "coords": [
+      25.0782266,
+      -77.3383438
+    ]
+  },
+  "NC   ": {
+    "name": "NORTH CAROLINA                          ",
+    "coords": [
+      35.4776017,
+      -77.5961132
+    ]
+  },
+  "NLU  ": {
+    "name": "SANTA LUCIA                             ",
+    "coords": [
+      19.0281998,
+      -99.3876448
+    ]
+  },
+  "NVA  ": {
+    "name": "Neiva                                   ",
+    "coords": [
+      2.9257038,
+      -75.2893937
+    ]
+  },
+  "PA   ": {
+    "name": "EXTON, PENNSYLVANIA                     ",
+    "coords": [
+      40.0289955,
+      -75.6207651
+    ]
+  },
+  "PAP  ": {
+    "name": "Port-au-Prince                          ",
+    "coords": [
+      18.547327,
+      -72.3395928
+    ]
+  },
+  "PCR  ": {
+    "name": "Puerto Carreño                          ",
+    "coords": [
+      6.1909225,
+      -67.4841891
+    ]
+  },
+  "PDA  ": {
+    "name": "Puerto Inirida                          ",
+    "coords": [
+      3.8650368,
+      -67.9259848
+    ]
+  },
+  "PEI  ": {
+    "name": "Pereira                                 ",
+    "coords": [
+      4.7854606,
+      -75.788322
+    ]
+  },
+  "PIO  ": {
+    "name": "PISCO                                   ",
+    "coords": [
+      -13.7099813,
+      -76.2029793
+    ]
+  },
+  "POS  ": {
+    "name": "Puerto España                           ",
+    "coords": [
+      10.6572678,
+      -61.5180173
+    ]
+  },
+  "PPN  ": {
+    "name": "Popayán                                 ",
+    "coords": [
+      2.4422295,
+      -76.6072368
+    ]
+  },
+  "PQE  ": {
+    "name": "Desconocido                             ",
+    "coords": [
+      41.7089525,
+      -0.8565087
+    ]
+  },
+  "PRO  ": {
+    "name": "PROVO,UT                                ",
+    "coords": [
+      40.2337289,
+      -111.6587085
+    ]
+  },
+  "PSO  ": {
+    "name": "Pasto                                   ",
+    "coords": [
+      1.2140275,
+      -77.2785096
+    ]
+  },
+  "PTP  ": {
+    "name": "Desconocido                             ",
+    "coords": [
+      41.7089525,
+      -0.8565087
+    ]
+  },
+  "PTY  ": {
+    "name": "Panama City                             ",
+    "coords": [
+      8.9714493,
+      -79.5341802
+    ]
+  },
+  "PUJ  ": {
+    "name": "Punta Cana                              ",
+    "coords": [
+      18.556551,
+      -68.3691611
+    ]
+  },
+  "PY   ": {
+    "name": "PUYALLUP                                ",
+    "coords": [
+      47.1849009,
+      -122.29214
+    ]
+  },
+  "RH   ": {
+    "name": "Rock Hill, SC                           ",
+    "coords": [
+      34.9248667,
+      -81.0250784
+    ]
+  },
+  "RNG  ": {
+    "name": "Rionegro                                ",
+    "coords": [
+      6.1536166,
+      -75.3741691
+    ]
+  },
+  "SAL  ": {
+    "name": "San Salvador                            ",
+    "coords": [
+      13.6989939,
+      -89.1914249
+    ]
+  },
+  "SAO  ": {
+    "name": "Sao Paulo                               ",
+    "coords": [
+      -23.5506507,
+      -46.6333824
+    ]
+  },
+  "SAP  ": {
+    "name": "San Pedro Sula                          ",
+    "coords": [
+      15.5062156,
+      -88.0248937
+    ]
+  },
+  "SCL  ": {
+    "name": "Santiago de Chile                       ",
+    "coords": [
+      -33.4377756,
+      -70.6504502
+    ]
+  },
+  "SDQ  ": {
+    "name": "Santo Domingo                           ",
+    "coords": [
+      18.4801972,
+      -69.942111
+    ]
+  },
+  "SIS  ": {
+    "name": "Desconocido                             ",
+    "coords": [
+      41.7089525,
+      -0.8565087
+    ]
+  },
+  "SJO  ": {
+    "name": "San José                                ",
+    "coords": [
+      9.9325427,
+      -84.0795782
+    ]
+  },
+  "SMR  ": {
+    "name": "Santa Marta                             ",
+    "coords": [
+      11.2320944,
+      -74.1950916
+    ]
+  },
+  "SPA  ": {
+    "name": "Sparks, NV                              ",
+    "coords": [
+      39.5404679,
+      -119.7487235
+    ]
+  },
+  "STD  ": {
+    "name": "Santo Domingo                           ",
+    "coords": [
+      7.5686328,
+      -72.0488492
+    ]
+  },
+  "SVO  ": {
+    "name": "Desconocido                             ",
+    "coords": [
+      41.7089525,
+      -0.8565087
+    ]
+  },
+  "SVZ  ": {
+    "name": "San Antonio                             ",
+    "coords": [
+      10.0097735,
+      -65.5569863
+    ]
+  },
+  "TBT  ": {
+    "name": "Tabatinga                               ",
+    "coords": [
+      -21.7373768,
+      -48.6880522
+    ]
+  },
+  "TCO  ": {
+    "name": "Tumaco                                  ",
+    "coords": [
+      1.8061434,
+      -78.7635572
+    ]
+  },
+  "TGU  ": {
+    "name": "Tegucigalpa                             ",
+    "coords": [
+      14.1057433,
+      -87.2040052
+    ]
+  },
+  "TMP  ": {
+    "name": "TAMPA, FL                               ",
+    "coords": [
+      27.9477595,
+      -82.458444
+    ]
+  },
+  "TNT  ": {
+    "name": "Desconocido                             ",
+    "coords": [
+      41.7089525,
+      -0.8565087
+    ]
+  },
+  "TRU  ": {
+    "name": "TRUJILLO                                ",
+    "coords": [
+      -8.1116778,
+      -79.0287742
+    ]
+  },
+  "UIO  ": {
+    "name": "Quito                                   ",
+    "coords": [
+      -0.2201641,
+      -78.5123274
+    ]
+  },
+  "URA  ": {
+    "name": "Desconocido                             ",
+    "coords": [
+      41.7089525,
+      -0.8565087
+    ]
+  },
+  "VAL  ": {
+    "name": "Valencia                                ",
+    "coords": [
+      10.170026,
+      -68.0003987
+    ]
+  },
+  "VIR  ": {
+    "name": "Desconocido                             ",
+    "coords": [
+      41.7089525,
+      -0.8565087
+    ]
+  },
+  "VLC  ": {
+    "name": "Desconocido                             ",
+    "coords": [
+      41.7089525,
+      -0.8565087
+    ]
+  },
+  "VLN  ": {
+    "name": "Valencia                                ",
+    "coords": [
+      10.170026,
+      -68.0003987
+    ]
+  },
+  "VRO  ": {
+    "name": "Desconocido                             ",
+    "coords": [
+      41.7089525,
+      -0.8565087
+    ]
+  },
+  "VUP  ": {
+    "name": "Valledupar                              ",
+    "coords": [
+      10.4651733,
+      -73.2529512
+    ]
+  },
+  "VVC  ": {
+    "name": "Villavicencio                           ",
+    "coords": [
+      4.1347644,
+      -73.6201517
+    ]
+  },
+  "VVR  ": {
+    "name": "VIRU - VIRU                             ",
+    "coords": [
+      -18.3833727,
+      -65.6531169
+    ]
+  },
+  "WAS  ": {
+    "name": "WASHINGTON D.C                          ",
+    "coords": [
+      38.8950368,
+      -77.0365427
+    ]
+  },
+  "WASH ": {
+    "name": "WASHINGTON D.C                          ",
+    "coords": [
+      38.8950368,
+      -77.0365427
+    ]
+  },
+  "WLL  ": {
+    "name": "Willemstad                              ",
+    "coords": [
+      12.1066695,
+      -68.9351307
+    ]
+  }
+}

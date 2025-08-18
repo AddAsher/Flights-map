@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Flight Routes Map</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        body { 
+            margin: 0; 
+            padding: 0; 
+            font-family: Arial, sans-serif;
+        }
+        #map { 
+            height: 100vh; 
+            width: 100%; 
+        }
+        .route-popup {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .legend {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            font-size: 12px;
+        }
+        .legend h4 {
+            margin: 0 0 8px 0;
+            font-size: 14px;
+        }
+        .legend-item {
+            margin: 3px 0;
+        }
+        .legend-line {
+            display: inline-block;
+            width: 20px;
+            height: 3px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .arrow-icon {
+            background: transparent !important;
+            border: none !important;
+        }
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="loading">Loading flight data...</div>
+    <div id="map"></div>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        // Initialize the map
+        var map = L.map('map').setView([4.5, -74], 6);
+        
+        // Add map tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Â© OpenStreetMap contributors',
+            maxZoom: 18
+        }).addTo(map);
+
+        // Function to fetch flight data from your database
+        async function fetchFlightData() {
+            try {
+                // This is where you'll connect to your database
+                // For now, we'll simulate the data structure
+                
+                // Step 1: Get airport coordinates from your Cities table
+                const airportCoords = await fetchAirportCoordinates();
+                
+                // Step 2: Get flight routes from your Bvaeronave table  
+                const flightRoutes = await fetchFlightRoutes();
+                
+                return { airportCoords, flightRoutes };
+                
+            } catch (error) {
+                console.error('Error fetching flight data:', error);
+                document.getElementById('loading').innerHTML = 'Error loading flight data';
+            }
+        }
+
+        // Mock function - replace this with actual database query
+        async function fetchAirportCoordinates() {
+            const response = await fetch('geocode-cache.json'); // Fetches the local file
+            const airportCoords = await response.json();
+            console.log("Loaded coordinates from geocode-cache.json");
+            return airportCoords;
+        }
+        
+        // async function fetchAirportCoordinates() {
+        //     // This should query: SELECT Codigociudad, Descripcion, Codpais FROM Ciudades
+        //     // Then map coordinates to each airport code
+        //     const response = await fetch('http://localhost:3000/api/airports');
+        //     const airportCoords = await response.json();
+        //     console.log(airportCoords);
+        //     return {
+        //         'SKBO': { name: 'BOGOTA', coords: [4.7016, -74.146] },
+        //         'SKBQ': { name: 'BARRANQUILLA', coords: [10.8896, -74.7806] },
+        //         'SKBG': { name: 'BUCARAMANGA', coords: [7.1264, -73.1848] },
+        //         'SKNV': { name: 'NEIVA', coords: [2.9442, -75.2939] },
+        //         'SKPD': { name: 'PUERTO INIRIDA', coords: [3.8533, -67.9062] },
+        //         'SKMD': { name: 'MADRID', coords: [4.7214, -74.0145] },
+        //         'SKCL': { name: 'CALI', coords: [3.4516, -76.224] },
+        //         'TQPF': { name: 'POINT FORTIN', coords: [10.1833, -61.6833] }
+        //         // Add more airports as needed
+        //     };
+        // }
+
+        // Mock function - replace this with actual database query  
+
+        // CHANGED: This function now calls your server to get live flight routes
+        async function fetchFlightRoutes() {
+            const response = await fetch('http://localhost:3000/api/routes');
+            const routes = await response.json();
+            
+            // Map the results and add a default value for passengers
+            return routes.map(route => ({
+                origin: route.Origen,
+                destination: route.Destino,
+                flights: route.flights,
+                totalTime: route.totalTime,
+                passengers: 0 // Using a default value of 0 as requested
+            }));
+        }
+        // async function fetchFlightRoutes() {
+        //     // This should query your Bvaeronave table:
+        //     // SELECT Origen, Destino, COUNT(*) as flight_count, 
+        //     //        SUM(Tiempovuelo) as total_time, COUNT(DISTINCT Codigovuelo) as flights
+        //     // FROM Bvaeronave 
+        //     // GROUP BY Origen, Destino
+            
+        //     return [
+        //         // PROPER BIDIRECTIONAL ROUTES TO TEST CURVES
+        //         { origin: 'SKBO', destination: 'SKBQ', flights: 15, totalTime: 45.5, passengers: 280 },
+        //         { origin: 'SKBQ', destination: 'SKBO', flights: 12, totalTime: 42.1, passengers: 245 }, // RETURN FLIGHT
+                
+        //         { origin: 'SKBO', destination: 'SKBG', flights: 18, totalTime: 28.7, passengers: 320 },
+        //         { origin: 'SKBG', destination: 'SKBO', flights: 16, totalTime: 26.3, passengers: 298 }, // RETURN FLIGHT
+                
+        //         { origin: 'SKBO', destination: 'SKPD', flights: 10, totalTime: 35.8, passengers: 145 },
+        //         { origin: 'SKPD', destination: 'SKBO', flights: 9, totalTime: 32.1, passengers: 134 }, // RETURN FLIGHT
+                
+        //         { origin: 'SKBO', destination: 'SKMD', flights: 25, totalTime: 5.5, passengers: 410 },
+        //         { origin: 'SKMD', destination: 'SKBO', flights: 23, totalTime: 5.1, passengers: 389 }, // RETURN FLIGHT
+                
+        //         // SINGLE DIRECTION ROUTES (should get small curves)
+        //         { origin: 'SKBO', destination: 'SKNV', flights: 6, totalTime: 8.9, passengers: 98 },
+        //         { origin: 'SKBQ', destination: 'SKBG', flights: 8, totalTime: 12.3, passengers: 156 }
+        //     ];
+        // }
+
+        // Function to get route color based on flight frequency
+        function getRouteColor(flights) {
+            if (flights >= 20) return '#d73027';      // Red - very high frequency
+            if (flights >= 10) return '#fc8d59';      // Orange - high frequency  
+            if (flights >= 5) return '#fee08b';       // Yellow - medium frequency
+            return '#d9ef8b';                         // Light green - low frequency
+        }
+
+        // Function to get route width based on passenger count
+        function getRouteWeight(passengers) {
+            if (passengers >= 300) return 8;
+            if (passengers >= 150) return 5; 
+            if (passengers >= 75) return 3;
+            if (passengers > 0) return 2;
+            return 1;
+        }
+
+        function buildPathMetrics(latlngs) {
+        const pts = latlngs.map(ll => map.latLngToLayerPoint(L.latLng(ll)));
+        const seg = [];
+        const cum = [0];
+        let total = 0;
+        for (let i = 0; i < pts.length - 1; i++) {
+            const d = Math.hypot(pts[i+1].x - pts[i].x, pts[i+1].y - pts[i].y);
+            seg.push(d);
+            total += d;
+            cum.push(total);
+        }
+        return { pts, seg, cum, total };
+        }
+
+        function layerPointAtDistance(metrics, d) {
+        d = Math.max(0, Math.min(metrics.total, d));
+        let i = 0;
+        while (i < metrics.seg.length && metrics.cum[i+1] < d) i++;
+        const segLen = metrics.seg[i] || 1;
+        const t = (d - metrics.cum[i]) / segLen;
+        const p = metrics.pts[i];
+        const q = metrics.pts[i+1] || p;
+        return L.point(p.x + t*(q.x - p.x), p.y + t*(q.y - p.y));
+        }
+
+        function latLngAtDistance(metrics, d) {
+        const P = layerPointAtDistance(metrics, d);
+        return map.layerPointToLatLng(P);
+        }
+
+        function angleAtDistance(metrics, d) {
+        const a = layerPointAtDistance(metrics, Math.max(0, d - 1));
+        const b = layerPointAtDistance(metrics, Math.min(metrics.total, d + 1));
+        // angle in degrees; +90 because the CSS triangle points "up" by default
+        return Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI + 90;
+        }
+
+        function makeArrowIcon(color, size=10, rotation=0) {
+        return L.divIcon({
+            html: `<div class="route-arrow" style="
+            width:0;height:0;
+            border-left:${size}px solid transparent;
+            border-right:${size}px solid transparent;
+            border-bottom:${size*1.4}px solid ${color};
+            transform: rotate(${rotation}deg);
+            transform-origin:50% 50%;
+            opacity:.95;"></div>`,
+            iconSize: [size*2, size*2],
+            iconAnchor: [size, size], // center on point
+            className: 'arrow-icon'
+        });
+        }
+
+        // ---------- static centered arrow ----------
+        function addCenteredArrow(curveLatLngs, color) {
+        let metrics = buildPathMetrics(curveLatLngs);
+        const mid = metrics.total / 2;
+        const midLL = latLngAtDistance(metrics, mid);
+        const angle = angleAtDistance(metrics, mid);
+
+        const marker = L.marker(midLL, { icon: makeArrowIcon(color, 10, angle) }).addTo(map);
+
+        // keep it correct on zoom/pan
+        function refresh() {
+            metrics = buildPathMetrics(curveLatLngs);
+            const mid2 = metrics.total / 2;
+            marker.setLatLng(latLngAtDistance(metrics, mid2));
+            const el = marker.getElement();
+            if (el) el.querySelector('.route-arrow').style.transform = `rotate(${angleAtDistance(metrics, mid2)}deg)`;
+        }
+        map.on('zoomend moveend', refresh);
+        return marker;
+        }
+
+        // ---------- animated arrow with smoothing ----------
+        function animateArrow(curveLatLngs, color, speedPxPerSec = 120) {
+        let metrics = buildPathMetrics(curveLatLngs);
+        let d = 0;
+        const icon = makeArrowIcon(color, 11, 0);
+        const marker = L.marker(latLngAtDistance(metrics, 0), { icon }).addTo(map);
+
+        // Smoothing variables
+        let lastAngle = 0;
+        let smoothedAngle = 0;
+        const ANGLE_SMOOTHING = 0.15; // Lower = more smoothing (0.1-0.3 range)
+        const ANGLE_DEADZONE = 5; // Degrees - ignore small angle changes
+        const MIN_PATH_LENGTH = 50; // Pixels - apply extra smoothing for short paths
+
+        let last = performance.now();
+        function tick(now) {
+            const dt = (now - last) / 1000; 
+            last = now;
+            
+            d = (d + speedPxPerSec * dt) % Math.max(metrics.total, 1);
+            const ll = latLngAtDistance(metrics, d);
+            marker.setLatLng(ll);
+            
+            // Calculate current angle
+            let currentAngle = angleAtDistance(metrics, d);
+            
+            // Apply extra smoothing for short paths
+            let smoothingFactor = ANGLE_SMOOTHING;
+            if (metrics.total < MIN_PATH_LENGTH) {
+                smoothingFactor = ANGLE_SMOOTHING * 0.3; // Much more smoothing for short paths
+            }
+            
+            // Normalize angle difference to handle 360° wraparound
+            let angleDiff = currentAngle - lastAngle;
+            while (angleDiff > 180) angleDiff -= 360;
+            while (angleDiff < -180) angleDiff += 360;
+            
+            // Apply deadzone - ignore small changes
+            if (Math.abs(angleDiff) < ANGLE_DEADZONE) {
+                currentAngle = lastAngle;
+            }
+            
+            // Smooth the angle using exponential moving average
+            if (lastAngle === 0) {
+                // First frame - no smoothing
+                smoothedAngle = currentAngle;
+            } else {
+                // Apply smoothing
+                smoothedAngle = lastAngle + (currentAngle - lastAngle) * smoothingFactor;
+            }
+            
+            lastAngle = smoothedAngle;
+            
+            const el = marker.getElement();
+            if (el) {
+                el.querySelector('.route-arrow').style.transform = `rotate(${smoothedAngle}deg)`;
+            }
+            
+            requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+
+        // rebuild metrics when the map view changes
+        function refresh() { 
+            metrics = buildPathMetrics(curveLatLngs);
+            // Reset smoothing on view changes
+            lastAngle = 0;
+            smoothedAngle = 0;
+        }
+        map.on('zoomend moveend', refresh);
+        return marker;
+        }
+
+        // Function to create curved path between two points
+        function createCurvedPath(start, end, curvature = 0.3) {
+            console.log('Creating curve with curvature:', curvature, 'from:', start, 'to:', end);
+            
+            var latlngs = [];
+            
+            // Calculate the midpoint
+            var midLat = (start[0] + end[0]) / 2;
+            var midLng = (start[1] + end[1]) / 2;
+            
+            // Calculate perpendicular offset for curve
+            var deltaLat = end[0] - start[0];
+            var deltaLng = end[1] - start[1];
+            
+            // Create perpendicular vector
+            var perpLat = -deltaLng * curvature;
+            var perpLng = deltaLat * curvature;
+            
+            // Control point for the curve
+            var controlLat = midLat + perpLat;
+            var controlLng = midLng + perpLng;
+            
+            console.log('Control point:', [controlLat, controlLng]);
+            
+            // Create curve using quadratic bezier
+            for (let i = 0; i <= 50; i++) {
+                let t = i / 50;
+                let oneMinusT = 1 - t;
+                
+                // Quadratic bezier formula
+                let lat = oneMinusT * oneMinusT * start[0] + 
+                         2 * oneMinusT * t * controlLat + 
+                         t * t * end[0];
+                         
+                let lng = oneMinusT * oneMinusT * start[1] + 
+                         2 * oneMinusT * t * controlLng + 
+                         t * t * end[1];
+                
+                latlngs.push([lat, lng]);
+            }
+            
+            console.log('Generated curve points:', latlngs.length, 'first point:', latlngs[0], 'last point:', latlngs[latlngs.length-1]);
+            return latlngs;
+        }
+
+        // Function to create arrow marker
+        function createArrowMarker(color, size = 8) {
+            return L.divIcon({
+                html: `<div style="
+                    width: 0; 
+                    height: 0; 
+                    border-left: ${size}px solid transparent;
+                    border-right: ${size}px solid transparent;
+                    border-bottom: ${size*1.5}px solid ${color};
+                    transform: rotate(45deg);
+                "></div>`,
+                iconSize: [size*2, size*2],
+                className: 'arrow-icon'
+            });
+        }
+
+        // Function to create the flight routes visualization
+        function createFlightVisualization(airportCoords, flightRoutes) {
+            document.getElementById('loading').style.display = 'none';
+            
+            // Simply draw each route as it appears in the data
+            flightRoutes.forEach(function(route) {
+                var originAirport = airportCoords[route.origin];
+                var destAirport = airportCoords[route.destination];
+                
+                if (originAirport && destAirport && route.origin !== route.destination) {
+                    // Create a simple curve for each route (all curve the same way slightly)
+                    var curvature = 0.3; // Simple curve for all routes
+                    var curvedPath = createCurvedPath(originAirport.coords, destAirport.coords, curvature);
+                        
+                    // Create the curved route line
+                    var routeLine = L.polyline(curvedPath, {
+                        color: getRouteColor(route.flights),
+                        weight: getRouteWeight(route.passengers),
+                        opacity: 0.8,
+                        dashArray: route.flights < 5 ? '8,4' : null
+                    });
+
+                    // Add popup with route information
+                    var popupContent = `
+                        <div class="route-popup">
+                            <strong>${originAirport.name} → ${destAirport.name}</strong><br>
+                            <strong>Route:</strong> ${route.origin} to ${route.destination}<br>
+                            <strong>Flights:</strong> ${route.flights}<br>
+                            <strong>Total Flight Time:</strong> ${route.totalTime.toFixed(1)} hrs<br>
+                            <strong>Total Passengers:</strong> ${route.passengers}
+                        </div>
+                    `;
+                    
+                    routeLine.bindPopup(popupContent);
+                    
+                    // Add hover effects
+                    routeLine.on('mouseover', function(e) {
+                        this.setStyle({
+                            weight: Math.max(this.options.weight + 2, 6),
+                            opacity: 1
+                        });
+                    });
+                    
+                    routeLine.on('mouseout', function(e) {
+                        this.setStyle({
+                            weight: getRouteWeight(route.passengers),
+                            opacity: 0.8
+                        });
+                    });
+                    
+                    routeLine.addTo(map);
+                    
+                    // Add arrow indicator for direction
+                    var midpointIndex = Math.floor(curvedPath.length / 2);
+                    var arrowPoint = curvedPath[midpointIndex];
+                    
+                    // CHANGED: Use points just before and after the midpoint to get the curve's tangent
+                    var p1 = curvedPath[midpointIndex - 1]; 
+                    var p2 = curvedPath[midpointIndex + 1];
+
+                    const color = getRouteColor(route.flights);
+
+                    // 1) static centered arrow with the right direction
+                    // addCenteredArrow(curvedPath, color);
+
+                    // 2) animated arrow moving along the curve
+                    animateArrow(curvedPath, color, 20); // adjust speed if you like
+                }
+            });
+
+            // Add airport markers
+            Object.keys(airportCoords).forEach(function(airportCode) {
+                var airport = airportCoords[airportCode];
+                
+                L.marker(airport.coords, {
+                    radius: 6,
+                    fillColor: '#2166ac',
+                    color: '#fff',
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: 0.9
+                })
+                .bindPopup(`<strong>${airport.name}</strong><br>Code: ${airportCode}`)
+                .addTo(map);
+            });
+
+            // Add legend
+            var legend = L.control({position: 'bottomright'});
+            legend.onAdd = function (map) {
+                var div = L.DomUtil.create('div', 'legend');
+                div.innerHTML = `
+                    <h4>Flight Routes</h4>
+                    <div class="legend-item">
+                        <span class="legend-line" style="background: #d73027;"></span> ≥20 flights
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-line" style="background: #fc8d59;"></span> 10-19 flights  
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-line" style="background: #fee08b;"></span> 5-9 flights
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-line" style="background: #d9ef8b;"></span> <5 flights
+                    </div>
+                    <div style="margin-top: 8px; font-size: 11px;">
+                        Line thickness = passenger volume<br>
+                        Dashed = low frequency routes
+                    </div>
+                `;
+                return div;
+            };
+            legend.addTo(map);
+
+            console.log('Dynamic flight routes map loaded successfully!');
+        }
+
+        // Load and display the data
+        fetchFlightData().then(data => {
+            if (data) {
+                createFlightVisualization(data.airportCoords, data.flightRoutes);
+            }
+        });
+
+        // TODO: Replace mock functions with actual database connections
+        // You'll need to:
+        // 1. Set up API endpoints to query your database
+        // 2. Replace fetchAirportCoordinates() with actual query to Ciudades table
+        // 3. Replace fetchFlightRoutes() with actual query to Bvaeronave table
+        // 4. Handle cases where airport coordinates are missing
+    </script>
+</body>
+</html>
