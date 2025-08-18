@@ -20,25 +20,62 @@ const config = {
 };
 
 // --- START: Caching Logic ---
-const CACHE_FILE_PATH = './geocode-cache.json';
+const GEOCODE_CACHE_FILE = './geocode-cache.json';
+const ROUTES_CACHE_FILE = './routes-cache.json';
 let geocodeCache = {};
+let routesCache = null;
+let routesCacheTimestamp = null;
 
-// Load the cache from the file if it exists when the server starts
+// Load the geocode cache from the file if it exists when the server starts
 try {
-    if (fs.existsSync(CACHE_FILE_PATH)) {
-        const data = fs.readFileSync(CACHE_FILE_PATH);
+    if (fs.existsSync(GEOCODE_CACHE_FILE)) {
+        const data = fs.readFileSync(GEOCODE_CACHE_FILE);
         geocodeCache = JSON.parse(data);
         console.log(`Loaded ${Object.keys(geocodeCache).length} coordinates from cache file.`);
     }
 } catch (err) {
-    console.error("Error loading cache file:", err);
+    console.error("Error loading geocode cache file:", err);
 }
 
-// Function to save the cache to a file
-function saveCache() {
+// Load the routes cache from the file if it exists when the server starts
+try {
+    if (fs.existsSync(ROUTES_CACHE_FILE)) {
+        const data = fs.readFileSync(ROUTES_CACHE_FILE);
+        const cacheData = JSON.parse(data);
+        routesCache = cacheData.routes;
+        routesCacheTimestamp = new Date(cacheData.timestamp);
+        console.log(`Loaded ${routesCache.length} routes from cache file. Last updated: ${routesCacheTimestamp}`);
+    }
+} catch (err) {
+    console.error("Error loading routes cache file:", err);
+}
+
+// Function to save the geocode cache to a file
+function saveGeocodeCache() {
     console.log('\nSaving coordinates cache to file...');
-    fs.writeFileSync(CACHE_FILE_PATH, JSON.stringify(geocodeCache, null, 2));
-    console.log('Cache saved. Exiting.');
+    fs.writeFileSync(GEOCODE_CACHE_FILE, JSON.stringify(geocodeCache, null, 2));
+    console.log('Geocode cache saved.');
+}
+
+// Function to save the routes cache to a file
+function saveRoutesCache(routes) {
+    console.log('\nSaving routes cache to file...');
+    const cacheData = {
+        timestamp: new Date().toISOString(),
+        routes: routes
+    };
+    fs.writeFileSync(ROUTES_CACHE_FILE, JSON.stringify(cacheData, null, 2));
+    routesCache = routes;
+    routesCacheTimestamp = new Date();
+    console.log('Routes cache saved.');
+}
+
+// Check if routes cache is still valid (24 hours)
+function isRoutesCacheValid() {
+    if (!routesCacheTimestamp) return false;
+    const now = new Date();
+    const hoursSinceUpdate = (now - routesCacheTimestamp) / (1000 * 60 * 60);
+    return hoursSinceUpdate < 24; // Cache valid for 24 hours
 }
 // --- END: Caching Logic ---
 
@@ -87,7 +124,6 @@ app.get('/api/airports', async (req, res) => {
                     });
                 }
 
-
                 const data = await response.json();
 
                 if (data && data.length > 0) {
@@ -107,7 +143,7 @@ app.get('/api/airports', async (req, res) => {
         
         // If we geocoded any new cities, save the updated cache to the file
         if (needsSave) {
-            saveCache();
+            saveGeocodeCache();
         }
         
         res.json(airportCoords);
@@ -118,11 +154,19 @@ app.get('/api/airports', async (req, res) => {
     }
 });
 
-// The /api/routes endpoint remains the same...
+// Updated /api/routes endpoint with caching
 app.get('/api/routes', async (req, res) => {
     try {
+        // Check if we have valid cached routes
+        if (routesCache && isRoutesCacheValid()) {
+            console.log("Serving routes from cache");
+            res.json(routesCache);
+            return;
+        }
+
+        // Cache is invalid or doesn't exist, fetch from database
+        console.log("Fetching routes from database...");
         await sql.connect(config);
-        console.log("in routes");
         const result = await sql.query`
             SELECT 
                 Origen, 
@@ -134,20 +178,60 @@ app.get('/api/routes', async (req, res) => {
             WHERE Fechavuelo >= DATEADD(year, -1, GETDATE())
             GROUP BY Origen, Destino
         `;
+        
+        // Save to cache
+        saveRoutesCache(result.recordset);
+        
         res.json(result.recordset);
     } catch (err) {
         console.error('Database error:', err);
-        res.status(500).json({ error: 'Database connection failed' });
+        
+        // If database fails but we have cached data, serve it
+        if (routesCache) {
+            console.log("Database failed, serving stale cache");
+            res.json(routesCache);
+        } else {
+            res.status(500).json({ error: 'Database connection failed and no cache available' });
+        }
+    }
+});
+
+// New endpoint to force refresh routes cache
+app.get('/api/routes/refresh', async (req, res) => {
+    try {
+        console.log("Force refreshing routes cache...");
+        await sql.connect(config);
+        const result = await sql.query`
+            SELECT 
+                Origen, 
+                Destino, 
+                COUNT(*) as flights,
+                SUM(Tiempovuelo) as totalTime,
+                COUNT(DISTINCT Codigovuelo) as uniqueFlights
+            FROM Bvaeronave 
+            WHERE Fechavuelo >= DATEADD(year, -1, GETDATE())
+            GROUP BY Origen, Destino
+        `;
+        
+        saveRoutesCache(result.recordset);
+        res.json({ message: 'Routes cache refreshed successfully', routes: result.recordset.length });
+    } catch (err) {
+        console.error('Database error:', err);
+        res.status(500).json({ error: 'Failed to refresh routes cache' });
     }
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Routes cache status: ${isRoutesCacheValid() ? 'Valid' : 'Invalid/Missing'}`);
 });
 
 // Save the cache when you stop the server gracefully (with Ctrl + C)
 process.on('SIGINT', () => {
-    saveCache();
+    if (Object.keys(geocodeCache).length > 0) {
+        saveGeocodeCache();
+    }
+    console.log('Cache saved. Exiting.');
     process.exit();
 });

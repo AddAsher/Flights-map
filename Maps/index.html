@@ -71,20 +71,17 @@
         
         // Add map tiles
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: 'Â© OpenStreetMap contributors',
+            attribution: '© OpenStreetMap contributors',
             maxZoom: 18
         }).addTo(map);
 
         // Function to fetch flight data from your database
         async function fetchFlightData() {
             try {
-                // This is where you'll connect to your database
-                // For now, we'll simulate the data structure
-                
-                // Step 1: Get airport coordinates from your Cities table
+                // Step 1: Get airport coordinates from cache file
                 const airportCoords = await fetchAirportCoordinates();
                 
-                // Step 2: Get flight routes from your Bvaeronave table  
+                // Step 2: Get flight routes from cache file  
                 const flightRoutes = await fetchFlightRoutes();
                 
                 return { airportCoords, flightRoutes };
@@ -95,75 +92,59 @@
             }
         }
 
-        // Mock function - replace this with actual database query
+        // Load coordinates from local cache file
         async function fetchAirportCoordinates() {
-            const response = await fetch('geocode-cache.json'); // Fetches the local file
-            const airportCoords = await response.json();
-            console.log("Loaded coordinates from geocode-cache.json");
-            return airportCoords;
+            try {
+                const response = await fetch('geocode-cache.json');
+                const airportCoords = await response.json();
+                console.log("Loaded coordinates from geocode-cache.json");
+                return airportCoords;
+            } catch (error) {
+                console.error('Error loading coordinates cache:', error);
+                return {};
+            }
         }
         
-        // async function fetchAirportCoordinates() {
-        //     // This should query: SELECT Codigociudad, Descripcion, Codpais FROM Ciudades
-        //     // Then map coordinates to each airport code
-        //     const response = await fetch('http://localhost:3000/api/airports');
-        //     const airportCoords = await response.json();
-        //     console.log(airportCoords);
-        //     return {
-        //         'SKBO': { name: 'BOGOTA', coords: [4.7016, -74.146] },
-        //         'SKBQ': { name: 'BARRANQUILLA', coords: [10.8896, -74.7806] },
-        //         'SKBG': { name: 'BUCARAMANGA', coords: [7.1264, -73.1848] },
-        //         'SKNV': { name: 'NEIVA', coords: [2.9442, -75.2939] },
-        //         'SKPD': { name: 'PUERTO INIRIDA', coords: [3.8533, -67.9062] },
-        //         'SKMD': { name: 'MADRID', coords: [4.7214, -74.0145] },
-        //         'SKCL': { name: 'CALI', coords: [3.4516, -76.224] },
-        //         'TQPF': { name: 'POINT FORTIN', coords: [10.1833, -61.6833] }
-        //         // Add more airports as needed
-        //     };
-        // }
-
-        // Mock function - replace this with actual database query  
-
-        // CHANGED: This function now calls your server to get live flight routes
+        // Load routes from local cache file (with fallback to server)
         async function fetchFlightRoutes() {
-            const response = await fetch('http://localhost:3000/api/routes');
-            const routes = await response.json();
+            try {
+                // First try to load from local cache
+                const response = await fetch('routes-cache.json');
+                if (response.ok) {
+                    const cacheData = await response.json();
+                    console.log("Loaded routes from routes-cache.json");
+                    
+                    // Map the results and add a default value for passengers
+                    return cacheData.routes.map(route => ({
+                        origin: route.Origen,
+                        destination: route.Destino,
+                        flights: route.flights,
+                        totalTime: route.totalTime,
+                        passengers: 0 // Using a default value of 0 as requested
+                    }));
+                }
+            } catch (error) {
+                console.log('Local routes cache not found, falling back to server...');
+            }
             
-            // Map the results and add a default value for passengers
-            return routes.map(route => ({
-                origin: route.Origen,
-                destination: route.Destino,
-                flights: route.flights,
-                totalTime: route.totalTime,
-                passengers: 0 // Using a default value of 0 as requested
-            }));
+            // Fallback to server if local cache doesn't exist
+            try {
+                const response = await fetch('http://localhost:3000/api/routes');
+                const routes = await response.json();
+                console.log("Loaded routes from server");
+                
+                return routes.map(route => ({
+                    origin: route.Origen,
+                    destination: route.Destino,
+                    flights: route.flights,
+                    totalTime: route.totalTime,
+                    passengers: 0
+                }));
+            } catch (error) {
+                console.error('Error loading routes from server:', error);
+                return [];
+            }
         }
-        // async function fetchFlightRoutes() {
-        //     // This should query your Bvaeronave table:
-        //     // SELECT Origen, Destino, COUNT(*) as flight_count, 
-        //     //        SUM(Tiempovuelo) as total_time, COUNT(DISTINCT Codigovuelo) as flights
-        //     // FROM Bvaeronave 
-        //     // GROUP BY Origen, Destino
-            
-        //     return [
-        //         // PROPER BIDIRECTIONAL ROUTES TO TEST CURVES
-        //         { origin: 'SKBO', destination: 'SKBQ', flights: 15, totalTime: 45.5, passengers: 280 },
-        //         { origin: 'SKBQ', destination: 'SKBO', flights: 12, totalTime: 42.1, passengers: 245 }, // RETURN FLIGHT
-                
-        //         { origin: 'SKBO', destination: 'SKBG', flights: 18, totalTime: 28.7, passengers: 320 },
-        //         { origin: 'SKBG', destination: 'SKBO', flights: 16, totalTime: 26.3, passengers: 298 }, // RETURN FLIGHT
-                
-        //         { origin: 'SKBO', destination: 'SKPD', flights: 10, totalTime: 35.8, passengers: 145 },
-        //         { origin: 'SKPD', destination: 'SKBO', flights: 9, totalTime: 32.1, passengers: 134 }, // RETURN FLIGHT
-                
-        //         { origin: 'SKBO', destination: 'SKMD', flights: 25, totalTime: 5.5, passengers: 410 },
-        //         { origin: 'SKMD', destination: 'SKBO', flights: 23, totalTime: 5.1, passengers: 389 }, // RETURN FLIGHT
-                
-        //         // SINGLE DIRECTION ROUTES (should get small curves)
-        //         { origin: 'SKBO', destination: 'SKNV', flights: 6, totalTime: 8.9, passengers: 98 },
-        //         { origin: 'SKBQ', destination: 'SKBG', flights: 8, totalTime: 12.3, passengers: 156 }
-        //     ];
-        // }
 
         // Function to get route color based on flight frequency
         function getRouteColor(flights) {
@@ -512,13 +493,6 @@
                 createFlightVisualization(data.airportCoords, data.flightRoutes);
             }
         });
-
-        // TODO: Replace mock functions with actual database connections
-        // You'll need to:
-        // 1. Set up API endpoints to query your database
-        // 2. Replace fetchAirportCoordinates() with actual query to Ciudades table
-        // 3. Replace fetchFlightRoutes() with actual query to Bvaeronave table
-        // 4. Handle cases where airport coordinates are missing
     </script>
 </body>
 </html>
