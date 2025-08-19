@@ -1,831 +1,1058 @@
 {
-  "timestamp": "2025-08-18T16:42:47.441Z",
+  "timestamp": "2025-08-19T18:52:07.567Z",
   "routes": [
     {
       "Origen": "     ",
       "Destino": null,
-      "flights": 297,
+      "flights": 88,
       "totalTime": 0,
-      "uniqueFlights": 297
+      "uniqueFlights": 88,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": null,
-      "flights": 148,
+      "flights": 97,
       "totalTime": 0,
-      "uniqueFlights": 148
+      "uniqueFlights": 97,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "CLO  ",
       "Destino": null,
       "flights": 1,
       "totalTime": 0,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "LET  ",
       "Destino": null,
       "flights": 1,
       "totalTime": 0,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "PCR  ",
       "Destino": null,
       "flights": 1,
       "totalTime": 0,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "PTY  ",
       "Destino": null,
       "flights": 1,
       "totalTime": 0,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "     ",
       "Destino": "     ",
-      "flights": 8,
-      "totalTime": 0.5,
-      "uniqueFlights": 8
+      "flights": 4,
+      "totalTime": 0,
+      "uniqueFlights": 4,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "MDE  ",
       "Destino": "     ",
       "flights": 1,
       "totalTime": 0.45,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "ADZ  ",
       "Destino": "ACA  ",
       "flights": 1,
       "totalTime": 0,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 3100,
+      "totalLoad": 3611.085911276423
     },
     {
       "Origen": "ACA  ",
       "Destino": "ADZ  ",
-      "flights": 2,
-      "totalTime": 0.66666667,
-      "uniqueFlights": 2
+      "flights": 1,
+      "totalTime": 0,
+      "uniqueFlights": 1,
+      "totalFuel": 3200,
+      "totalLoad": 435.90674045178093
     },
     {
       "Origen": "BOG  ",
       "Destino": "ADZ  ",
-      "flights": 69,
-      "totalTime": 118.43333335999999,
-      "uniqueFlights": 69
+      "flights": 68,
+      "totalTime": 117.43333335999999,
+      "uniqueFlights": 68,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "CLO  ",
       "Destino": "ADZ  ",
       "flights": 1,
       "totalTime": 1.75,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "AUA  ",
       "flights": 19,
-      "totalTime": 27.349999999999998,
-      "uniqueFlights": 19
+      "totalTime": 27.35,
+      "uniqueFlights": 19,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "CUR  ",
       "Destino": "AUA  ",
       "flights": 1,
       "totalTime": 0.4,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "RNG  ",
       "Destino": "AUA  ",
       "flights": 1,
       "totalTime": 1.36666667,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "UIO  ",
       "Destino": "AUA  ",
       "flights": 4,
       "totalTime": 9.13333334,
-      "uniqueFlights": 4
+      "uniqueFlights": 4,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "AUC  ",
       "Destino": "AUC  ",
       "flights": 1,
       "totalTime": 0,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "AUC  ",
       "flights": 36,
       "totalTime": 28.783333319999997,
-      "uniqueFlights": 36
+      "uniqueFlights": 36,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "MDE  ",
       "Destino": "AUC  ",
       "flights": 1,
       "totalTime": 0.81666667,
-      "uniqueFlights": 1
-    },
-    {
-      "Origen": "ACA  ",
-      "Destino": "BAQ  ",
-      "flights": 1,
-      "totalTime": 0,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "AUA  ",
       "Destino": "BAQ  ",
       "flights": 1,
       "totalTime": 0.93333333,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "BAQ  ",
-      "flights": 340,
+      "flights": 339,
       "totalTime": 360.9166663200006,
-      "uniqueFlights": 340
+      "uniqueFlights": 339,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "CCS  ",
       "Destino": "BAQ  ",
       "flights": 5,
       "totalTime": 6.4,
-      "uniqueFlights": 5
+      "uniqueFlights": 5,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "CUR  ",
       "Destino": "BAQ  ",
       "flights": 1,
       "totalTime": 1.08333333,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "MDE  ",
       "Destino": "BAQ  ",
       "flights": 3,
       "totalTime": 2.48333333,
-      "uniqueFlights": 3
+      "uniqueFlights": 3,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "PTY  ",
       "Destino": "BAQ  ",
       "flights": 5,
       "totalTime": 4.1,
-      "uniqueFlights": 5
+      "uniqueFlights": 5,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "RNG  ",
       "Destino": "BAQ  ",
       "flights": 1,
       "totalTime": 0.83333333,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "BGA  ",
       "flights": 1,
       "totalTime": 0.58333333,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "BGI  ",
       "flights": 1,
       "totalTime": 2.5,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "ADZ  ",
       "Destino": "BOG  ",
       "flights": 69,
-      "totalTime": 118.98333337999999,
-      "uniqueFlights": 69
+      "totalTime": 118.98333338,
+      "uniqueFlights": 69,
+      "totalFuel": 0,
+      "totalLoad": 7014.7000000000035
     },
     {
       "Origen": "AUA  ",
       "Destino": "BOG  ",
       "flights": 24,
-      "totalTime": 36.549999979999996,
-      "uniqueFlights": 24
+      "totalTime": 36.54999998,
+      "uniqueFlights": 24,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "AUC  ",
       "Destino": "BOG  ",
       "flights": 37,
       "totalTime": 32.44999996999999,
-      "uniqueFlights": 37
+      "uniqueFlights": 37,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BAQ  ",
       "Destino": "BOG  ",
       "flights": 344,
       "totalTime": 374.56666643000017,
-      "uniqueFlights": 344
+      "uniqueFlights": 344,
+      "totalFuel": 0,
+      "totalLoad": -12063.18181818182
     },
     {
       "Origen": "BGA  ",
       "Destino": "BOG  ",
       "flights": 1,
       "totalTime": 0.66666667,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BGI  ",
       "Destino": "BOG  ",
       "flights": 1,
       "totalTime": 2.91666667,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "BOG  ",
-      "flights": 57,
+      "flights": 54,
       "totalTime": 9.9,
-      "uniqueFlights": 57
+      "uniqueFlights": 54,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BRM  ",
       "Destino": "BOG  ",
       "flights": 18,
-      "totalTime": 23.850000009999995,
-      "uniqueFlights": 18
+      "totalTime": 23.85000001,
+      "uniqueFlights": 18,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "CCS  ",
       "Destino": "BOG  ",
-      "flights": 277,
-      "totalTime": 427.61666668,
-      "uniqueFlights": 277
+      "flights": 275,
+      "totalTime": 424.61666668000004,
+      "uniqueFlights": 275,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "CLO  ",
       "Destino": "BOG  ",
       "flights": 240,
-      "totalTime": 144.91666649999988,
-      "uniqueFlights": 240
+      "totalTime": 144.9166665,
+      "uniqueFlights": 240,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "CUR  ",
       "Destino": "BOG  ",
       "flights": 54,
-      "totalTime": 81.96666667000001,
-      "uniqueFlights": 54
+      "totalTime": 81.96666667,
+      "uniqueFlights": 54,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "EYP  ",
       "Destino": "BOG  ",
       "flights": 1,
       "totalTime": 0.53333333,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "LET  ",
       "Destino": "BOG  ",
       "flights": 197,
-      "totalTime": 328.4833334099999,
-      "uniqueFlights": 197
+      "totalTime": 328.48333340999983,
+      "uniqueFlights": 197,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "LSP  ",
       "Destino": "BOG  ",
       "flights": 58,
-      "totalTime": 81.31666669,
-      "uniqueFlights": 58
+      "totalTime": 81.31666668999999,
+      "uniqueFlights": 58,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "MDE  ",
       "Destino": "BOG  ",
       "flights": 226,
-      "totalTime": 110.60000004,
-      "uniqueFlights": 226
+      "totalTime": 110.60000003999998,
+      "uniqueFlights": 226,
+      "totalFuel": 0,
+      "totalLoad": -15031.499999999995
     },
     {
       "Origen": "MIQ  ",
       "Destino": "BOG  ",
       "flights": 1,
       "totalTime": 1.56666667,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "MTU  ",
       "Destino": "BOG  ",
       "flights": 4,
       "totalTime": 4.38333332,
-      "uniqueFlights": 4
+      "uniqueFlights": 4,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "MVP  ",
       "Destino": "BOG  ",
       "flights": 92,
       "totalTime": 104.16666666,
-      "uniqueFlights": 92
+      "uniqueFlights": 92,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "PCR  ",
       "Destino": "BOG  ",
       "flights": 55,
       "totalTime": 68.93333333999999,
-      "uniqueFlights": 55
+      "uniqueFlights": 55,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "PDA  ",
       "Destino": "BOG  ",
-      "flights": 194,
+      "flights": 193,
       "totalTime": 230.35000009000007,
-      "uniqueFlights": 194
+      "uniqueFlights": 193,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "PTY  ",
       "Destino": "BOG  ",
       "flights": 364,
-      "totalTime": 426.1500002199997,
-      "uniqueFlights": 364
+      "totalTime": 426.15000021999964,
+      "uniqueFlights": 364,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "RNG  ",
       "Destino": "BOG  ",
       "flights": 39,
-      "totalTime": 19.86666665,
-      "uniqueFlights": 39
+      "totalTime": 19.866666650000006,
+      "uniqueFlights": 39,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "SDQ  ",
       "Destino": "BOG  ",
       "flights": 3,
       "totalTime": 7.01666667,
-      "uniqueFlights": 3
+      "uniqueFlights": 3,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "UIO  ",
       "Destino": "BOG  ",
       "flights": 20,
       "totalTime": 23.150000010000003,
-      "uniqueFlights": 20
+      "uniqueFlights": 20,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "VAL  ",
       "Destino": "BOG  ",
       "flights": 3,
       "totalTime": 3.99999999,
-      "uniqueFlights": 3
+      "uniqueFlights": 3,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "VLN  ",
       "Destino": "BOG  ",
       "flights": 77,
-      "totalTime": 106.96666664999996,
-      "uniqueFlights": 77
+      "totalTime": 106.96666664999998,
+      "uniqueFlights": 77,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "VVC  ",
       "Destino": "BOG  ",
       "flights": 1,
       "totalTime": 0.5,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "BRM  ",
       "flights": 23,
-      "totalTime": 27.10000001,
-      "uniqueFlights": 23
+      "totalTime": 27.100000010000006,
+      "uniqueFlights": 23,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "CCS  ",
       "Destino": "BRM  ",
       "flights": 3,
       "totalTime": 1.8333333299999999,
-      "uniqueFlights": 3
+      "uniqueFlights": 3,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "LSP  ",
       "Destino": "BRM  ",
       "flights": 1,
       "totalTime": 0.43333333,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "VLN  ",
       "Destino": "BRM  ",
       "flights": 2,
       "totalTime": 0.81666667,
-      "uniqueFlights": 2
+      "uniqueFlights": 2,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BAQ  ",
       "Destino": "CCS  ",
       "flights": 4,
       "totalTime": 4.7166666699999995,
-      "uniqueFlights": 4
+      "uniqueFlights": 4,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "CCS  ",
-      "flights": 305,
-      "totalTime": 449.30000018999954,
-      "uniqueFlights": 305
+      "flights": 304,
+      "totalTime": 447.8333335199997,
+      "uniqueFlights": 304,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "CCS  ",
       "Destino": "CCS  ",
       "flights": 3,
       "totalTime": 0.41666667,
-      "uniqueFlights": 3
+      "uniqueFlights": 3,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "VLN  ",
       "Destino": "CCS  ",
       "flights": 6,
       "totalTime": 2.48333334,
-      "uniqueFlights": 6
+      "uniqueFlights": 6,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "ADZ  ",
       "Destino": "CLO  ",
       "flights": 1,
       "totalTime": 1.91666667,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BAQ  ",
       "Destino": "CLO  ",
       "flights": 3,
       "totalTime": 3.46666667,
-      "uniqueFlights": 3
+      "uniqueFlights": 3,
+      "totalFuel": 2900,
+      "totalLoad": 8827.451691916904
     },
     {
       "Origen": "BOG  ",
       "Destino": "CLO  ",
-      "flights": 237,
-      "totalTime": 139.01666648000005,
-      "uniqueFlights": 237
+      "flights": 236,
+      "totalTime": 138.39999981000008,
+      "uniqueFlights": 236,
+      "totalFuel": 0,
+      "totalLoad": 1800.4545454545441
     },
     {
       "Origen": "CLO  ",
       "Destino": "CLO  ",
       "flights": 1,
       "totalTime": 0,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "LET  ",
       "Destino": "CLO  ",
       "flights": 1,
       "totalTime": 1.86666667,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "RNG  ",
       "Destino": "CLO  ",
       "flights": 1,
       "totalTime": 0.66666667,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "CUR  ",
       "flights": 40,
-      "totalTime": 58.63333335000002,
-      "uniqueFlights": 40
+      "totalTime": 58.633333349999994,
+      "uniqueFlights": 40,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "UIO  ",
       "Destino": "CUR  ",
       "flights": 16,
-      "totalTime": 37.533333320000004,
-      "uniqueFlights": 16
+      "totalTime": 37.53333331999999,
+      "uniqueFlights": 16,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "LET  ",
       "Destino": "CWB  ",
       "flights": 1,
       "totalTime": 4.28333333,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "EYP  ",
-      "flights": 34,
+      "flights": 33,
       "totalTime": 15.566666660000001,
-      "uniqueFlights": 34
+      "uniqueFlights": 33,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "CCS  ",
       "Destino": "EYP  ",
       "flights": 1,
       "totalTime": 2.81666667,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "IQT  ",
       "flights": 1,
       "totalTime": 2.33333333,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "LET  ",
       "flights": 192,
       "totalTime": 305.94999999000015,
-      "uniqueFlights": 192
+      "uniqueFlights": 192,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "CWB  ",
       "Destino": "LET  ",
       "flights": 1,
       "totalTime": 4.33333333,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "IQT  ",
       "Destino": "LET  ",
       "flights": 1,
       "totalTime": 0.66666667,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "LET  ",
       "Destino": "LET  ",
-      "flights": 2,
+      "flights": 1,
       "totalTime": 0,
-      "uniqueFlights": 2
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "PTY  ",
       "Destino": "LET  ",
       "flights": 5,
       "totalTime": 11.86666667,
-      "uniqueFlights": 5
+      "uniqueFlights": 5,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "RNG  ",
       "Destino": "LET  ",
       "flights": 1,
       "totalTime": 1.86666667,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "LSP  ",
       "flights": 30,
       "totalTime": 39.150000000000006,
-      "uniqueFlights": 30
+      "uniqueFlights": 30,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BRM  ",
       "Destino": "LSP  ",
       "flights": 8,
       "totalTime": 3.88333333,
-      "uniqueFlights": 8
+      "uniqueFlights": 8,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "CCS  ",
       "Destino": "LSP  ",
       "flights": 16,
-      "totalTime": 10.78333335,
-      "uniqueFlights": 16
+      "totalTime": 10.783333349999998,
+      "uniqueFlights": 16,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "VAL  ",
       "Destino": "LSP  ",
       "flights": 1,
       "totalTime": 0.6,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "VLN  ",
       "Destino": "LSP  ",
       "flights": 4,
       "totalTime": 2.3000000000000003,
-      "uniqueFlights": 4
+      "uniqueFlights": 4,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BAQ  ",
       "Destino": "MDE  ",
       "flights": 1,
       "totalTime": 1.86666667,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "MDE  ",
       "flights": 228,
-      "totalTime": 115.16666659999997,
-      "uniqueFlights": 228
+      "totalTime": 115.16666659999999,
+      "uniqueFlights": 228,
+      "totalFuel": 0,
+      "totalLoad": 29060.9
     },
     {
       "Origen": "MDE  ",
       "Destino": "MDE  ",
       "flights": 1,
       "totalTime": 0.83333333,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "PCR  ",
       "Destino": "MDE  ",
       "flights": 1,
       "totalTime": 1.7,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "PDA  ",
       "Destino": "MDE  ",
       "flights": 1,
       "totalTime": 1.5,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "MIQ  ",
       "flights": 2,
       "totalTime": 3.0833333300000003,
-      "uniqueFlights": 2
+      "uniqueFlights": 2,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "MTU  ",
       "flights": 3,
       "totalTime": 3.0166666600000003,
-      "uniqueFlights": 3
+      "uniqueFlights": 3,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "EYP  ",
       "Destino": "MTU  ",
       "flights": 1,
       "totalTime": 0.78333333,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "MVP  ",
       "flights": 60,
       "totalTime": 60.44999999,
-      "uniqueFlights": 60
+      "uniqueFlights": 60,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "EYP  ",
       "Destino": "MVP  ",
-      "flights": 33,
+      "flights": 32,
       "totalTime": 26.69999999,
-      "uniqueFlights": 33
+      "uniqueFlights": 32,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "PCR  ",
       "flights": 56,
-      "totalTime": 64.41666667000001,
-      "uniqueFlights": 56
+      "totalTime": 64.41666667,
+      "uniqueFlights": 56,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "PDA  ",
-      "flights": 195,
-      "totalTime": 208.9833332999998,
-      "uniqueFlights": 195
+      "flights": 194,
+      "totalTime": 208.98333329999988,
+      "uniqueFlights": 194,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BAQ  ",
       "Destino": "PTY  ",
       "flights": 4,
       "totalTime": 3.4166666599999997,
-      "uniqueFlights": 4
+      "uniqueFlights": 4,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "PTY  ",
-      "flights": 371,
-      "totalTime": 436.2833334599997,
-      "uniqueFlights": 371
+      "flights": 370,
+      "totalTime": 435.2000001299994,
+      "uniqueFlights": 370,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "PTY  ",
       "Destino": "PTY  ",
       "flights": 5,
       "totalTime": 0.83333333,
-      "uniqueFlights": 5
+      "uniqueFlights": 5,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "SAL  ",
       "Destino": "PTY  ",
       "flights": 1,
       "totalTime": 1.66666667,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BAQ  ",
       "Destino": "RNG  ",
       "flights": 1,
       "totalTime": 0.91666667,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "RNG  ",
       "flights": 40,
-      "totalTime": 19.85,
-      "uniqueFlights": 40
+      "totalTime": 19.850000000000005,
+      "uniqueFlights": 40,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "LET  ",
       "Destino": "RNG  ",
       "flights": 1,
       "totalTime": 1.78333333,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "PTY  ",
       "Destino": "RNG  ",
       "flights": 1,
       "totalTime": 1.41666667,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "PTY  ",
       "Destino": "SAL  ",
       "flights": 1,
       "totalTime": 1.75,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "SDQ  ",
       "flights": 3,
       "totalTime": 6.6499999999999995,
-      "uniqueFlights": 3
+      "uniqueFlights": 3,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "UIO  ",
       "flights": 40,
-      "totalTime": 46.91666669,
-      "uniqueFlights": 40
+      "totalTime": 46.916666690000014,
+      "uniqueFlights": 40,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "VAL  ",
       "flights": 3,
       "totalTime": 3.9000000000000004,
-      "uniqueFlights": 3
+      "uniqueFlights": 3,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "MIQ  ",
       "Destino": "VAL  ",
       "flights": 1,
       "totalTime": 0.38333333,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "VCP  ",
       "flights": 9,
       "totalTime": 51.48333333,
-      "uniqueFlights": 9
+      "uniqueFlights": 9,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "VLN  ",
       "flights": 62,
-      "totalTime": 80.34999997999999,
-      "uniqueFlights": 62
+      "totalTime": 80.34999998000004,
+      "uniqueFlights": 62,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BRM  ",
       "Destino": "VLN  ",
       "flights": 3,
       "totalTime": 1.2333333400000002,
-      "uniqueFlights": 3
+      "uniqueFlights": 3,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "CCS  ",
       "Destino": "VLN  ",
       "flights": 15,
-      "totalTime": 6.41666669,
-      "uniqueFlights": 15
+      "totalTime": 6.4166666900000005,
+      "uniqueFlights": 15,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "VCP  ",
       "Destino": "VLN  ",
       "flights": 9,
-      "totalTime": 51.166666660000004,
-      "uniqueFlights": 9
+      "totalTime": 51.16666666000001,
+      "uniqueFlights": 9,
+      "totalFuel": 0,
+      "totalLoad": 0
     },
     {
       "Origen": "BOG  ",
       "Destino": "VVC  ",
       "flights": 1,
       "totalTime": 0.41666667,
-      "uniqueFlights": 1
+      "uniqueFlights": 1,
+      "totalFuel": 0,
+      "totalLoad": 0
     }
   ]
 }

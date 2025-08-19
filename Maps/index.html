@@ -46,6 +46,15 @@
             background: transparent !important;
             border: none !important;
         }
+        .circle-icon {
+            background: transparent !important;
+            border: none !important;
+        }
+        .route-circle {
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 4px rgba(0,0,0,0.3);
+        }
         #loading {
             position: absolute;
             top: 50%;
@@ -120,6 +129,8 @@
                         destination: route.Destino,
                         flights: route.flights,
                         totalTime: route.totalTime,
+                        totalFuel: route.totalFuel,
+                        totalLoad: route.totalLoad,
                         passengers: 0 // Using a default value of 0 as requested
                     }));
                 }
@@ -138,6 +149,8 @@
                     destination: route.Destino,
                     flights: route.flights,
                     totalTime: route.totalTime,
+                    totalFuel: route.totalFuel,
+                    totalLoad: route.totalLoad,
                     passengers: 0
                 }));
             } catch (error) {
@@ -148,10 +161,10 @@
 
         // Function to get route color based on flight frequency
         function getRouteColor(flights) {
-            if (flights >= 20) return '#d73027';      // Red - very high frequency
-            if (flights >= 10) return '#fc8d59';      // Orange - high frequency  
-            if (flights >= 5) return '#fee08b';       // Yellow - medium frequency
-            return '#d9ef8b';                         // Light green - low frequency
+            if (flights >= 200) return '#d73027';      // Red - very high frequency
+            if (flights >= 100) return '#fc783a';      // Orange - high frequency  
+            if (flights >= 50) return '#ffe659';       // Yellow - medium frequency
+            return '#46b363';                         // Light green - low frequency
         }
 
         // Function to get route width based on passenger count
@@ -200,115 +213,192 @@
         return Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI + 90;
         }
 
-        function makeArrowIcon(color, size=10, rotation=0) {
-        return L.divIcon({
-            html: `<div class="route-arrow" style="
-            width:0;height:0;
-            border-left:${size}px solid transparent;
-            border-right:${size}px solid transparent;
-            border-bottom:${size*1.4}px solid ${color};
-            transform: rotate(${rotation}deg);
-            transform-origin:50% 50%;
-            opacity:.95;"></div>`,
-            iconSize: [size*2, size*2],
-            iconAnchor: [size, size], // center on point
-            className: 'arrow-icon'
-        });
+                // Modified function to create circle icons instead of arrows
+        function makeCircleIcon(color, size=10) {
+            return L.divIcon({
+                html: `<div class="route-circle" style="
+                width: ${size}px;
+                height: ${size}px;
+                background-color: ${color};
+                opacity: 0.9;
+                "></div>`,
+                iconSize: [size, size],
+                iconAnchor: [size/2, size/2], // center on point
+                className: 'circle-icon'
+            });
         }
 
-        // ---------- static centered arrow ----------
-        function addCenteredArrow(curveLatLngs, color) {
-        let metrics = buildPathMetrics(curveLatLngs);
-        const mid = metrics.total / 2;
-        const midLL = latLngAtDistance(metrics, mid);
-        const angle = angleAtDistance(metrics, mid);
+         // ---------- static centered circle ----------
+        function addCenteredCircle(curveLatLngs, color) {
+            let metrics = buildPathMetrics(curveLatLngs);
+            const mid = metrics.total / 2;
+            const midLL = latLngAtDistance(metrics, mid);
 
-        const marker = L.marker(midLL, { icon: makeArrowIcon(color, 10, angle) }).addTo(map);
+            const marker = L.marker(midLL, { icon: makeCircleIcon(color, 12) }).addTo(map);
 
-        // keep it correct on zoom/pan
-        function refresh() {
-            metrics = buildPathMetrics(curveLatLngs);
-            const mid2 = metrics.total / 2;
-            marker.setLatLng(latLngAtDistance(metrics, mid2));
-            const el = marker.getElement();
-            if (el) el.querySelector('.route-arrow').style.transform = `rotate(${angleAtDistance(metrics, mid2)}deg)`;
-        }
-        map.on('zoomend moveend', refresh);
-        return marker;
+            // keep it correct on zoom/pan
+            function refresh() {
+                metrics = buildPathMetrics(curveLatLngs);
+                const mid2 = metrics.total / 2;
+                marker.setLatLng(latLngAtDistance(metrics, mid2));
+            }
+            map.on('zoomend moveend', refresh);
+            return marker;
         }
 
-        // ---------- animated arrow with smoothing ----------
-        function animateArrow(curveLatLngs, color, speedPxPerSec = 120) {
-        let metrics = buildPathMetrics(curveLatLngs);
-        let d = 0;
-        const icon = makeArrowIcon(color, 11, 0);
-        const marker = L.marker(latLngAtDistance(metrics, 0), { icon }).addTo(map);
+        // ---------- animated circle ----------
+        function animateCircle(curveLatLngs, color, speedPxPerSec = 120) {
+            let metrics = buildPathMetrics(curveLatLngs);
+            let d = 0;
+            const icon = makeCircleIcon(color, 10);
+            const marker = L.marker(latLngAtDistance(metrics, 0), { icon }).addTo(map);
 
-        // Smoothing variables
-        let lastAngle = 0;
-        let smoothedAngle = 0;
-        const ANGLE_SMOOTHING = 0.15; // Lower = more smoothing (0.1-0.3 range)
-        const ANGLE_DEADZONE = 5; // Degrees - ignore small angle changes
-        const MIN_PATH_LENGTH = 50; // Pixels - apply extra smoothing for short paths
-
-        let last = performance.now();
-        function tick(now) {
-            const dt = (now - last) / 1000; 
-            last = now;
-            
-            d = (d + speedPxPerSec * dt) % Math.max(metrics.total, 1);
-            const ll = latLngAtDistance(metrics, d);
-            marker.setLatLng(ll);
-            
-            // Calculate current angle
-            let currentAngle = angleAtDistance(metrics, d);
-            
-            // Apply extra smoothing for short paths
-            let smoothingFactor = ANGLE_SMOOTHING;
-            if (metrics.total < MIN_PATH_LENGTH) {
-                smoothingFactor = ANGLE_SMOOTHING * 0.3; // Much more smoothing for short paths
+            let last = performance.now();
+            function tick(now) {
+                const dt = (now - last) / 1000; 
+                last = now;
+                
+                d = (d + speedPxPerSec * dt) % Math.max(metrics.total, 1);
+                const ll = latLngAtDistance(metrics, d);
+                marker.setLatLng(ll);
+                
+                requestAnimationFrame(tick);
             }
-            
-            // Normalize angle difference to handle 360° wraparound
-            let angleDiff = currentAngle - lastAngle;
-            while (angleDiff > 180) angleDiff -= 360;
-            while (angleDiff < -180) angleDiff += 360;
-            
-            // Apply deadzone - ignore small changes
-            if (Math.abs(angleDiff) < ANGLE_DEADZONE) {
-                currentAngle = lastAngle;
-            }
-            
-            // Smooth the angle using exponential moving average
-            if (lastAngle === 0) {
-                // First frame - no smoothing
-                smoothedAngle = currentAngle;
-            } else {
-                // Apply smoothing
-                smoothedAngle = lastAngle + (currentAngle - lastAngle) * smoothingFactor;
-            }
-            
-            lastAngle = smoothedAngle;
-            
-            const el = marker.getElement();
-            if (el) {
-                el.querySelector('.route-arrow').style.transform = `rotate(${smoothedAngle}deg)`;
-            }
-            
             requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
 
-        // rebuild metrics when the map view changes
-        function refresh() { 
-            metrics = buildPathMetrics(curveLatLngs);
-            // Reset smoothing on view changes
-            lastAngle = 0;
-            smoothedAngle = 0;
+            // rebuild metrics when the map view changes
+            function refresh() { 
+                metrics = buildPathMetrics(curveLatLngs);
+            }
+            map.on('zoomend moveend', refresh);
+            return marker;
         }
-        map.on('zoomend moveend', refresh);
-        return marker;
-        }
+        
+        // function makeArrowIcon(color, size=10, rotation=0) {
+        // return L.divIcon({
+        //     html: `<div class="route-arrow" style="
+        //     width:0;height:0;
+        //     border-left:${size}px solid transparent;
+        //     border-right:${size}px solid transparent;
+        //     border-bottom:${size*1.4}px solid ${color};
+        //     transform: rotate(${rotation}deg);
+        //     transform-origin:50% 50%;
+        //     opacity:.95;"></div>`,
+        //     iconSize: [size*2, size*2],
+        //     iconAnchor: [size, size], // center on point
+        //     className: 'arrow-icon'
+        // });
+        // }
+
+        // // ---------- static centered arrow ----------
+        // function addCenteredArrow(curveLatLngs, color) {
+        // let metrics = buildPathMetrics(curveLatLngs);
+        // const mid = metrics.total / 2;
+        // const midLL = latLngAtDistance(metrics, mid);
+        // const angle = angleAtDistance(metrics, mid);
+
+        // const marker = L.marker(midLL, { icon: makeArrowIcon(color, 10, angle) }).addTo(map);
+
+        // // keep it correct on zoom/pan
+        // function refresh() {
+        //     metrics = buildPathMetrics(curveLatLngs);
+        //     const mid2 = metrics.total / 2;
+        //     marker.setLatLng(latLngAtDistance(metrics, mid2));
+        //     const el = marker.getElement();
+        //     if (el) el.querySelector('.route-arrow').style.transform = `rotate(${angleAtDistance(metrics, mid2)}deg)`;
+        // }
+        // map.on('zoomend moveend', refresh);
+        // return marker;
+        // }
+
+        // // ---------- animated arrow with smoothing ----------
+        // function animateArrow(curveLatLngs, color, speedPxPerSec = 120) {
+        // let metrics = buildPathMetrics(curveLatLngs);
+        // let d = 0;
+        // const icon = makeArrowIcon(color, 11, 0);
+        // const marker = L.marker(latLngAtDistance(metrics, 0), { icon }).addTo(map);
+
+        // // Smoothing variables
+        // let lastAngle = 0;
+        // let smoothedAngle = 0;
+        // const ANGLE_SMOOTHING = 0.15; // Lower = more smoothing (0.1-0.3 range)
+        // const ANGLE_DEADZONE = 5; // Degrees - ignore small angle changes
+        // const MIN_PATH_LENGTH = 50; // Pixels - apply extra smoothing for short paths
+
+        // let last = performance.now();
+        // function tick(now) {
+        //     const dt = (now - last) / 1000; 
+        //     last = now;
+            
+        //     d = (d + speedPxPerSec * dt) % Math.max(metrics.total, 1);
+        //     const ll = latLngAtDistance(metrics, d);
+        //     marker.setLatLng(ll);
+            
+        //     // Calculate current angle
+        //     let currentAngle = angleAtDistance(metrics, d);
+            
+        //     // Apply extra smoothing for short paths
+        //     let smoothingFactor = ANGLE_SMOOTHING;
+        //     if (metrics.total < MIN_PATH_LENGTH) {
+        //         smoothingFactor = ANGLE_SMOOTHING * 0.3; // Much more smoothing for short paths
+        //     }
+            
+        //     // Normalize angle difference to handle 360° wraparound
+        //     let angleDiff = currentAngle - lastAngle;
+        //     while (angleDiff > 180) angleDiff -= 360;
+        //     while (angleDiff < -180) angleDiff += 360;
+            
+        //     // Apply deadzone - ignore small changes
+        //     if (Math.abs(angleDiff) < ANGLE_DEADZONE) {
+        //         currentAngle = lastAngle;
+        //     }
+            
+        //     // Smooth the angle using exponential moving average
+        //     if (lastAngle === 0) {
+        //         // First frame - no smoothing
+        //         smoothedAngle = currentAngle;
+        //     } else {
+        //         // Apply smoothing
+        //         smoothedAngle = lastAngle + (currentAngle - lastAngle) * smoothingFactor;
+        //     }
+            
+        //     lastAngle = smoothedAngle;
+            
+        //     const el = marker.getElement();
+        //     if (el) {
+        //         el.querySelector('.route-arrow').style.transform = `rotate(${smoothedAngle}deg)`;
+        //     }
+            
+        //     requestAnimationFrame(tick);
+        // }
+        // requestAnimationFrame(tick);
+        
+        // // rebuild metrics when the map view changes
+        // function refresh() { 
+            //     metrics = buildPathMetrics(curveLatLngs);
+        //     // Reset smoothing on view changes
+        //     lastAngle = 0;
+        //     smoothedAngle = 0;
+        // }
+        // map.on('zoomend moveend', refresh);
+        // return marker;
+        // }
+        
+        // Function to create arrow marker
+        // function createArrowMarker(color, size = 8) {
+        //     return L.divIcon({
+        //         html: `<div style="
+        //             width: 0; 
+        //             height: 0; 
+        //             border-left: ${size}px solid transparent;
+        //             border-right: ${size}px solid transparent;
+        //             border-bottom: ${size*1.5}px solid ${color};
+        //             transform: rotate(45deg);
+        //         "></div>`,
+        //         iconSize: [size*2, size*2],
+        //         className: 'arrow-icon'
+        //     });
+        // }
 
         // Function to create curved path between two points
         function createCurvedPath(start, end, curvature = 0.3) {
@@ -355,21 +445,6 @@
             return latlngs;
         }
 
-        // Function to create arrow marker
-        function createArrowMarker(color, size = 8) {
-            return L.divIcon({
-                html: `<div style="
-                    width: 0; 
-                    height: 0; 
-                    border-left: ${size}px solid transparent;
-                    border-right: ${size}px solid transparent;
-                    border-bottom: ${size*1.5}px solid ${color};
-                    transform: rotate(45deg);
-                "></div>`,
-                iconSize: [size*2, size*2],
-                className: 'arrow-icon'
-            });
-        }
 
         // Function to create the flight routes visualization
         function createFlightVisualization(airportCoords, flightRoutes) {
@@ -400,6 +475,8 @@
                             <strong>Route:</strong> ${route.origin} to ${route.destination}<br>
                             <strong>Flights:</strong> ${route.flights}<br>
                             <strong>Total Flight Time:</strong> ${route.totalTime.toFixed(1)} hrs<br>
+                            <strong>Total Fuel:</strong> ${route.totalFuel} hrs<br>
+                            <strong>Total Load:</strong> ${route.totalLoad} hrs<br>
                             <strong>Total Passengers:</strong> ${route.passengers}
                         </div>
                     `;
@@ -424,12 +501,12 @@
                     routeLine.addTo(map);
                     
                     // Add arrow indicator for direction
-                    var midpointIndex = Math.floor(curvedPath.length / 2);
-                    var arrowPoint = curvedPath[midpointIndex];
+                    // var midpointIndex = Math.floor(curvedPath.length / 2);
+                    // var arrowPoint = curvedPath[midpointIndex];
                     
-                    // CHANGED: Use points just before and after the midpoint to get the curve's tangent
-                    var p1 = curvedPath[midpointIndex - 1]; 
-                    var p2 = curvedPath[midpointIndex + 1];
+                    // // CHANGED: Use points just before and after the midpoint to get the curve's tangent
+                    // var p1 = curvedPath[midpointIndex - 1]; 
+                    // var p2 = curvedPath[midpointIndex + 1];
 
                     const color = getRouteColor(route.flights);
 
@@ -437,7 +514,7 @@
                     // addCenteredArrow(curvedPath, color);
 
                     // 2) animated arrow moving along the curve
-                    animateArrow(curvedPath, color, 20); // adjust speed if you like
+                    animateCircle(curvedPath, color, 20); // adjust speed if you like
                 }
             });
 
@@ -464,16 +541,16 @@
                 div.innerHTML = `
                     <h4>Flight Routes</h4>
                     <div class="legend-item">
-                        <span class="legend-line" style="background: #d73027;"></span> ≥20 flights
+                        <span class="legend-line" style="background: #d73027;"></span> ≥200 flights
                     </div>
                     <div class="legend-item">
-                        <span class="legend-line" style="background: #fc8d59;"></span> 10-19 flights  
+                        <span class="legend-line" style="background: #fc783a;"></span> 100-199 flights  
                     </div>
                     <div class="legend-item">
-                        <span class="legend-line" style="background: #fee08b;"></span> 5-9 flights
+                        <span class="legend-line" style="background: #ffe659;"></span> 50-99 flights
                     </div>
                     <div class="legend-item">
-                        <span class="legend-line" style="background: #d9ef8b;"></span> <5 flights
+                        <span class="legend-line" style="background: #46b363;"></span> <50 flights
                     </div>
                     <div style="margin-top: 8px; font-size: 11px;">
                         Line thickness = passenger volume<br>

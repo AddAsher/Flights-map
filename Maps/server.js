@@ -169,14 +169,28 @@ app.get('/api/routes', async (req, res) => {
         await sql.connect(config);
         const result = await sql.query`
             SELECT 
-                Origen, 
-                Destino, 
+                b.Origen, 
+                b.Destino, 
                 COUNT(*) as flights,
-                SUM(Tiempovuelo) as totalTime,
-                COUNT(DISTINCT Codigovuelo) as uniqueFlights
-            FROM Bvaeronave 
-            WHERE Fechavuelo >= DATEADD(year, -1, GETDATE())
-            GROUP BY Origen, Destino
+                SUM(b.Tiempovuelo) as totalTime,
+                COUNT(DISTINCT b.Codigovuelo) as uniqueFlights,
+                COALESCE(SUM(f.fueladd), 0) as totalFuel,
+                COALESCE(SUM(
+                    CASE 
+                        WHEN a.Unidadcombustible = 'KGS' 
+                        THEN b.carga * 2.20462  -- Convert KG to LBS
+                        ELSE b.carga  -- Already in LBS
+                    END
+                ), 0) as totalLoad
+            FROM Bvaeronave b
+            INNER JOIN aeronave a ON b.serieaeronave = a.serieaeronave
+            LEFT JOIN Bvfueladd f ON b.Codigovuelo = f.codigovuelo
+            WHERE 
+                b.Fechavuelo >= DATEADD(year, -1, GETDATE())
+                AND b.anulada = 0
+                AND b.mantenimiento = 0
+                AND a.activo = 1
+            GROUP BY b.Origen, b.Destino
         `;
         
         // Save to cache
@@ -203,14 +217,28 @@ app.get('/api/routes/refresh', async (req, res) => {
         await sql.connect(config);
         const result = await sql.query`
             SELECT 
-                Origen, 
-                Destino, 
+                b.Origen, 
+                b.Destino, 
                 COUNT(*) as flights,
-                SUM(Tiempovuelo) as totalTime,
-                COUNT(DISTINCT Codigovuelo) as uniqueFlights
-            FROM Bvaeronave 
-            WHERE Fechavuelo >= DATEADD(year, -1, GETDATE())
-            GROUP BY Origen, Destino
+                SUM(b.Tiempovuelo) as totalTime,
+                COUNT(DISTINCT b.Codigovuelo) as uniqueFlights,
+                COALESCE(SUM(f.fueladd), 0) as totalFuel,
+                COALESCE(SUM(
+                    CASE 
+                        WHEN a.Unidadcombustible = 'KGS' 
+                        THEN b.carga * 2.20462  -- Convert KG to LBS
+                        ELSE b.carga  -- Already in LBS
+                    END
+                ), 0) as totalLoad
+            FROM Bvaeronave b
+            INNER JOIN aeronave a ON b.serieaeronave = a.serieaeronave
+            LEFT JOIN Bvfueladd f ON b.Codigovuelo = f.codigovuelo
+            WHERE 
+                b.Fechavuelo >= DATEADD(year, -1, GETDATE())
+                AND b.anulada = 0
+                AND b.mantenimiento = 0
+                AND a.activo = 1
+            GROUP BY b.Origen, b.Destino
         `;
         
         saveRoutesCache(result.recordset);
