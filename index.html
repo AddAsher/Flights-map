@@ -161,9 +161,9 @@
 
         // Function to get route color based on flight frequency
         function getRouteColor(flights) {
-            if (flights >= 200) return '#d73027';      // Red - very high frequency
-            if (flights >= 100) return '#fc783a';      // Orange - high frequency  
-            if (flights >= 50) return '#ffe659';       // Yellow - medium frequency
+            if (flights > 200) return '#d73027';      // Red - very high frequency
+            if (flights > 100) return '#fc783a';      // Orange - high frequency  
+            if (flights > 50) return '#ffe659';       // Yellow - medium frequency
             return '#46b363';                         // Light green - low frequency
         }
 
@@ -541,16 +541,16 @@
                 div.innerHTML = `
                     <h4>Flight Routes</h4>
                     <div class="legend-item">
-                        <span class="legend-line" style="background: #d73027;"></span> ≥200 flights
+                        <span class="legend-line" style="background: #d73027;"></span> >200 flights
                     </div>
                     <div class="legend-item">
-                        <span class="legend-line" style="background: #fc783a;"></span> 100-199 flights  
+                        <span class="legend-line" style="background: #fc783a;"></span> 101-200 flights  
                     </div>
                     <div class="legend-item">
-                        <span class="legend-line" style="background: #ffe659;"></span> 50-99 flights
+                        <span class="legend-line" style="background: #ffe659;"></span> 51-100 flights
                     </div>
                     <div class="legend-item">
-                        <span class="legend-line" style="background: #46b363;"></span> <50 flights
+                        <span class="legend-line" style="background: #46b363;"></span> ≤50 flights
                     </div>
                     <div style="margin-top: 8px; font-size: 11px;">
                         Line thickness = passenger volume<br>
