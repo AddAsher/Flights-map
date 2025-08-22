@@ -42,6 +42,17 @@
             margin-right: 8px;
             vertical-align: middle;
         }
+        .title-box {
+            background: white;
+            padding: 12px 16px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            min-width: 200px;
+        }
         .arrow-icon {
             background: transparent !important;
             border: none !important;
@@ -475,8 +486,8 @@
                             <strong>Route:</strong> ${route.origin} to ${route.destination}<br>
                             <strong>Flights:</strong> ${route.flights}<br>
                             <strong>Total Flight Time:</strong> ${route.totalTime.toFixed(1)} hrs<br>
-                            <strong>Total Fuel:</strong> ${route.totalFuel} hrs<br>
-                            <strong>Total Load:</strong> ${route.totalLoad} hrs<br>
+                            <strong>Total Fuel:</strong> ${route.totalFuel.toFixed(2)} Gal<br>
+                            <strong>Total Load:</strong> ${route.totalLoad.toFixed(2)} lbs<br>
                             <strong>Total Passengers:</strong> ${route.passengers}
                         </div>
                     `;
@@ -533,6 +544,15 @@
                 .bindPopup(`<strong>${airport.name}</strong><br>Code: ${airportCode}`)
                 .addTo(map);
             });
+
+            // Add title box in top-right corner
+            var titleBox = L.control({position: 'topright'});
+            titleBox.onAdd = function (map) {
+                var div = L.DomUtil.create('div', 'title-box');
+                div.innerHTML = 'Flight Map - Last 12 Months';
+                return div;
+            };
+            titleBox.addTo(map);
 
             // Add legend
             var legend = L.control({position: 'bottomright'});
